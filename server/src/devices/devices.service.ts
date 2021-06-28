@@ -12,6 +12,8 @@ export class DevicesService {
     constructor(
         @InjectModel(Device)
         private readonly deviceModel: typeof Device,
+        @InjectModel(DeviceInfo)
+        private readonly deviceInfoModel: typeof DeviceInfo,
         @InjectModel(Type)
         private readonly typeModel: typeof Type,
         @InjectModel(Brand)
@@ -87,7 +89,7 @@ export class DevicesService {
             if (info) {
                 const arrInfo = JSON.parse(info);
                 for (const item of arrInfo) {
-                    DeviceInfo.create({
+                    this.deviceInfoModel.create({
                         title: item.title,
                         description: item.description,
                         device_id: device.id,
